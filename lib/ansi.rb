@@ -1,82 +1,105 @@
 module ANSI extend self
+    def immediate_mode!
+        @mode = :immediate
+    end
+
+    def string_mode!
+        @mode = :string
+    end
+
     def cuu(n=nil)
-        print_sequence('A', n)
+        output('A', n)
     end
 
     def cud(n=nil)
-        print_sequence('B', n)
+        output('B', n)
     end
 
     def cuf(n=nil)
-        print_sequence('C', n)
+        output('C', n)
     end
 
     def cub(n=nil)
-        print_sequence('D', n)
+        output('D', n)
     end
 
     def cnl(n=nil)
-        print_sequence('E', n)
+        output('E', n)
     end
 
     def cpl(n=nil)
-        print_sequence('F', n)
+        output('F', n)
     end
 
     def cha(n=nil)
-        print_sequence('G', n)
+        output('G', n)
     end
 
     def cup(n='', m=nil)
-        print_sequence('H', n, m)
+        output('H', n, m)
     end
 
     def ed(n=nil)
-        print_sequence('J', n)
+        output('J', n)
     end
 
     def el(n=nil)
-        print_sequence('K', n)
+        output('K', n)
     end
 
     def su(n=nil)
-        print_sequence('S', n)
+        output('S', n)
     end
 
     def sd(n=nil)
-        print_sequence('T', n)
+        output('T', n)
     end
 
     def hvp(n=nil, m=nil)
-        print_sequence('f', n, m)
+        output('f', n, m)
     end
 
     def sgr(*args)
-        print_sequence('m', args)
+        s = sequence('m', args)
         if block_given?
-            yield
-            print_sequence('m')
+            s += yield + sequence('m')
         end
-        self
+
+        if @mode == :string
+            s
+        else
+            print(s)
+            self
+        end
     end
 
     def dsr
-        print_sequence('n', 6)
+        output('n', 6)
     end
 
     def scp
-        print_sequence('s')
+        output('s')
     end
 
     def rcp
-        print_sequence('u')
+        output('u')
     end
 
     private
 
     CSI = "\u001b["
 
-    def print_sequence(command, *args)
-        print("#{CSI}#{args.compact.join(';')}#{command}")
+    def sequence(command, *args)
+        "#{CSI}#{args.compact.join(';')}#{command}"
+    end
+
+    def output(command, *args)
+        s = sequence(command, *args)
+        if @mode == :string
+            s
+        else
+            print(s)
+            self
+        end
     end
 end
