@@ -89,7 +89,7 @@ module Ansillary extend self
         sgr
     end
 
-    def write(s)
+    def write(s='')
         if @mode == :string
             s
         else
@@ -98,7 +98,7 @@ module Ansillary extend self
         end
     end
 
-    def writeln(s)
+    def writeln(s='')
         write(s + "\n")
     end
 
