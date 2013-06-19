@@ -85,9 +85,26 @@ module Ansillary extend self
         output('u')
     end
 
+    def reset
+        sgr
+    end
+
+    def write(s)
+        if @mode == :string
+            s
+        else
+            print(s)
+            self
+        end
+    end
+
+    def writeln(s)
+        write(s + "\n")
+    end
+
     private
 
-    CSI = "\u001b["
+    CSI = "\e["
 
     def sequence(command, *args)
         "#{CSI}#{args.compact.join(';')}#{command}"

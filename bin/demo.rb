@@ -13,3 +13,5 @@ puts "this is " + cyan { "string" } + " mode\n"
 
 immediate_mode!
 sgr(35, 1) { "back to immediate mode\n" }
+
+green.write("hello, ").cyan.write("how are ").yellow.writeln("you?").reset
