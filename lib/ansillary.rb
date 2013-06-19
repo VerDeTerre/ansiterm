@@ -1,4 +1,4 @@
-module ANSI extend self
+module Ansillary extend self
     def immediate_mode!
         @mode = :immediate
     end

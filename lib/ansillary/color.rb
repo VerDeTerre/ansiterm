@@ -1,6 +1,6 @@
-require 'ansi'
+require 'ansillary'
 
-module ANSI
+module Ansillary
     def black(&block)
         sgr(30, &block)
     end
