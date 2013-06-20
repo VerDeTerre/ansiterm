@@ -1,10 +1,12 @@
 module Ansillary extend self
     def immediate_mode!
         @mode = :immediate
+        self
     end
 
     def string_mode!
         @mode = :string
+        self
     end
 
     def cuu(n=nil)
