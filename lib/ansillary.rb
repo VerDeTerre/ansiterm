@@ -10,61 +10,61 @@ module Ansillary extend self
     end
 
     def cuu(n=nil)
-        output('A', n)
+        csi('A', n)
     end
 
     def cud(n=nil)
-        output('B', n)
+        csi('B', n)
     end
 
     def cuf(n=nil)
-        output('C', n)
+        csi('C', n)
     end
 
     def cub(n=nil)
-        output('D', n)
+        csi('D', n)
     end
 
     def cnl(n=nil)
-        output('E', n)
+        csi('E', n)
     end
 
     def cpl(n=nil)
-        output('F', n)
+        csi('F', n)
     end
 
     def cha(n=nil)
-        output('G', n)
+        csi('G', n)
     end
 
     def cup(n='', m=nil)
-        output('H', n, m)
+        csi('H', n, m)
     end
 
     def ed(n=nil)
-        output('J', n)
+        csi('J', n)
     end
 
     def el(n=nil)
-        output('K', n)
+        csi('K', n)
     end
 
     def su(n=nil)
-        output('S', n)
+        csi('S', n)
     end
 
     def sd(n=nil)
-        output('T', n)
+        csi('T', n)
     end
 
     def hvp(n=nil, m=nil)
-        output('f', n, m)
+        csi('f', n, m)
     end
 
     def sgr(*args)
-        s = sequence('m', args)
+        s = csi_sequence('m', args)
         if block_given?
-            s += yield + sequence('m')
+            s += yield + csi_sequence('m')
         end
 
         if @mode == :string
@@ -76,15 +76,15 @@ module Ansillary extend self
     end
 
     def dsr
-        output('n', 6)
+        csi('n', 6)
     end
 
     def scp
-        output('s')
+        csi('s')
     end
 
     def rcp
-        output('u')
+        csi('u')
     end
 
     def reset
@@ -104,20 +104,27 @@ module Ansillary extend self
         write(s + "\n")
     end
 
+    def c1(command)
+        output("\e#{command}")
+    end
+
+    def csi(command, *args)
+        output(csi_sequence(command, *args))
+    end
+
     private
 
     CSI = "\e["
 
-    def sequence(command, *args)
+    def csi_sequence(command, *args)
         "#{CSI}#{args.compact.join(';')}#{command}"
     end
 
-    def output(command, *args)
-        s = sequence(command, *args)
+    def output(sequence)
         if @mode == :string
-            s
+            sequence
         else
-            print(s)
+            print(sequence)
             self
         end
     end
