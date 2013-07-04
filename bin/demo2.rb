@@ -1,6 +1,6 @@
-require 'ansillary/color'
+require 'ansiterm/color'
 
-include Ansillary
+include Ansiterm
 
 green { <<-'END' }
  __  ___   __  ___  ____ ____

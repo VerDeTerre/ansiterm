@@ -1,6 +1,6 @@
-require 'ansillary/color'
+require 'ansiterm/color'
 
-include Ansillary
+include Ansiterm
 
 cyan { "This will look strange unless your terminal supports xterm colors\n\n" }
 

@@ -1,4 +1,4 @@
-module Ansillary extend self
+module Ansiterm extend self
     def immediate_mode!
         @mode = :immediate
         self

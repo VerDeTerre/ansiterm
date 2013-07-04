@@ -1,6 +1,6 @@
-require 'ansillary/color'
+require 'ansiterm/color'
 
-include Ansillary
+include Ansiterm
 
 [:red, :green, :yellow, :blue, :magenta, :cyan, :white].each do |color|
     __send__(color) { "Hello!\n" }

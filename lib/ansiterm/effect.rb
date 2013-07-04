@@ -1,6 +1,6 @@
-require 'ansillary'
+require 'ansiterm'
 
-module Ansillary
+module Ansiterm
     def bold(&block)
         sgr(1, &block)
     end

@@ -1,7 +1,7 @@
-require 'ansillary/color'
+require 'ansiterm/color'
 
 class Colorizer
-    include Ansillary
+    include Ansiterm
 end
 
 c1 = Colorizer.new
